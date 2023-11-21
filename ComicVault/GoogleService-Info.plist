@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAO3n9vCcYabgQoF0bXugZJINUil4SJd2Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1024200182311</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>sheridan.omario.ComicVault</string>
+	<key>PROJECT_ID</key>
+	<string>comicvault-9cc5f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>comicvault-9cc5f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1024200182311:ios:8796d5811f020a34275c02</string>
+</dict>
+</plist>
