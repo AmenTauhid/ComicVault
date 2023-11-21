@@ -8,17 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */; };
-		179BCC4F2B0D16CA001A0E00 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BCC4E2B0D16CA001A0E00 /* ContentView.swift */; };
 		179BCC512B0D16CB001A0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC502B0D16CB001A0E00 /* Assets.xcassets */; };
 		179BCC542B0D16CB001A0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC532B0D16CB001A0E00 /* Preview Assets.xcassets */; };
+		64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA62B0D1AB1009A490C /* ChatsView.swift */; };
+		64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAD2B0D1AB2009A490C /* PublishCollectionsView.swift */; };
+		64E7FBB02B0D1AB2009A490C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA72B0D1AB1009A490C /* SettingsView.swift */; };
+		64E7FBB12B0D1AB2009A490C /* OthersCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA82B0D1AB1009A490C /* OthersCollectionsView.swift */; };
+		64E7FBB22B0D1AB2009A490C /* AddComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA52B0D1AB1009A490C /* AddComicView.swift */; };
+		64E7FBB32B0D1AB2009A490C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAB2B0D1AB2009A490C /* HomeView.swift */; };
+		64E7FBB42B0D1AB2009A490C /* PriceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAC2B0D1AB2009A490C /* PriceListView.swift */; };
+		64E7FBB52B0D1AB2009A490C /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA92B0D1AB1009A490C /* NotificationsView.swift */; };
+		64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAA2B0D1AB2009A490C /* DatabaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		179BCC492B0D16CA001A0E00 /* ComicVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComicVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVaultApp.swift; sourceTree = "<group>"; };
-		179BCC4E2B0D16CA001A0E00 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		179BCC502B0D16CB001A0E00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		179BCC532B0D16CB001A0E00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		64E7FBA52B0D1AB1009A490C /* AddComicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComicView.swift; sourceTree = "<group>"; };
+		64E7FBA62B0D1AB1009A490C /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		64E7FBA72B0D1AB1009A490C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		64E7FBA82B0D1AB1009A490C /* OthersCollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersCollectionsView.swift; sourceTree = "<group>"; };
+		64E7FBA92B0D1AB1009A490C /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		64E7FBAA2B0D1AB2009A490C /* DatabaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseView.swift; sourceTree = "<group>"; };
+		64E7FBAB2B0D1AB2009A490C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		64E7FBAC2B0D1AB2009A490C /* PriceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListView.swift; sourceTree = "<group>"; };
+		64E7FBAD2B0D1AB2009A490C /* PublishCollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCollectionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +67,8 @@
 		179BCC4B2B0D16CA001A0E00 /* ComicVault */ = {
 			isa = PBXGroup;
 			children = (
+				64E7FBB72B0D1AD5009A490C /* Views */,
 				179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */,
-				179BCC4E2B0D16CA001A0E00 /* ContentView.swift */,
 				179BCC502B0D16CB001A0E00 /* Assets.xcassets */,
 				179BCC522B0D16CB001A0E00 /* Preview Content */,
 			);
@@ -65,6 +81,22 @@
 				179BCC532B0D16CB001A0E00 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		64E7FBB72B0D1AD5009A490C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				64E7FBA52B0D1AB1009A490C /* AddComicView.swift */,
+				64E7FBA62B0D1AB1009A490C /* ChatsView.swift */,
+				64E7FBAA2B0D1AB2009A490C /* DatabaseView.swift */,
+				64E7FBAB2B0D1AB2009A490C /* HomeView.swift */,
+				64E7FBA92B0D1AB1009A490C /* NotificationsView.swift */,
+				64E7FBA82B0D1AB1009A490C /* OthersCollectionsView.swift */,
+				64E7FBAC2B0D1AB2009A490C /* PriceListView.swift */,
+				64E7FBAD2B0D1AB2009A490C /* PublishCollectionsView.swift */,
+				64E7FBA72B0D1AB1009A490C /* SettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +169,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				179BCC4F2B0D16CA001A0E00 /* ContentView.swift in Sources */,
+				64E7FBB02B0D1AB2009A490C /* SettingsView.swift in Sources */,
+				64E7FBB52B0D1AB2009A490C /* NotificationsView.swift in Sources */,
+				64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */,
+				64E7FBB42B0D1AB2009A490C /* PriceListView.swift in Sources */,
+				64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */,
+				64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */,
 				179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */,
+				64E7FBB32B0D1AB2009A490C /* HomeView.swift in Sources */,
+				64E7FBB12B0D1AB2009A490C /* OthersCollectionsView.swift in Sources */,
+				64E7FBB22B0D1AB2009A490C /* AddComicView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

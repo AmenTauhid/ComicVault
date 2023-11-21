@@ -11,7 +11,7 @@ import SwiftUI
 struct ComicVaultApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
