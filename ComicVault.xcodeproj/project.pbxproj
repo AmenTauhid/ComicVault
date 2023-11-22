@@ -14,7 +14,7 @@
 		175ED76A2B0DE51800617929 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED7692B0DE51800617929 /* FirebaseFirestore */; };
 		175ED76C2B0DE52700617929 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED76B2B0DE52700617929 /* FirebaseAuth */; };
 		175ED76E2B0DE52D00617929 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED76D2B0DE52D00617929 /* FirebaseFirestoreSwift */; };
-		175ED77E2B0EC09100617929 /* ComicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED77D2B0EC09100617929 /* ComicDetailView.swift */; };
+		175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED77F2B0EC4F200617929 /* ComicDetailView.swift */; };
 		179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */; };
 		179BCC512B0D16CB001A0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC502B0D16CB001A0E00 /* Assets.xcassets */; };
 		179BCC542B0D16CB001A0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC532B0D16CB001A0E00 /* Preview Assets.xcassets */; };
@@ -39,7 +39,7 @@
 		175ED75D2B0DDBD400617929 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVineHelper.swift; sourceTree = "<group>"; };
 		175ED7622B0DDC3C00617929 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		175ED77D2B0EC09100617929 /* ComicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailView.swift; sourceTree = "<group>"; };
+		175ED77F2B0EC4F200617929 /* ComicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailView.swift; sourceTree = "<group>"; };
 		179BCC492B0D16CA001A0E00 /* ComicVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComicVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVaultApp.swift; sourceTree = "<group>"; };
 		179BCC502B0D16CB001A0E00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,6 +145,7 @@
 				64E7FBA52B0D1AB1009A490C /* AddComicView.swift */,
 				64E7FBAA2B0D1AB2009A490C /* DatabaseView.swift */,
 				64E7FBAC2B0D1AB2009A490C /* PriceListView.swift */,
+				175ED77F2B0EC4F200617929 /* ComicDetailView.swift */,
 			);
 			path = BottomNav;
 			sourceTree = "<group>";
@@ -164,7 +165,6 @@
 			children = (
 				64E7FBA92B0D1AB1009A490C /* NotificationsView.swift */,
 				64E7FBA72B0D1AB1009A490C /* SettingsView.swift */,
-				175ED77D2B0EC09100617929 /* ComicDetailView.swift */,
 			);
 			path = TopNav;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 				64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */,
 				64E7FBB42B0D1AB2009A490C /* PriceListView.swift in Sources */,
 				64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */,
-				175ED77E2B0EC09100617929 /* ComicDetailView.swift in Sources */,
+				175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */,
 				64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */,
 				179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */,
 				175ED7632B0DDC3C00617929 /* FirestoreManager.swift in Sources */,
