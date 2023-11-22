@@ -6,9 +6,9 @@
 //
 import Foundation
 
-struct Comic: Identifiable, Codable {
+struct Comic: Codable, Identifiable {
     var id: String = UUID().uuidString
     var name: String
     var issueNumber: String
-    var barcode: String?
+    var releaseYear: String
 }
