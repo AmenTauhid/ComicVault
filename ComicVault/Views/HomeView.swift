@@ -78,20 +78,30 @@ struct HomeView: View {
 
                     HStack {
                         NavigationLink(destination: OthersCollectionsView()) {
-                            Text("Explore Collections ")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color(red: 236/255, green: 107/255, blue: 102/255)) //Light Red
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
-                                .padding(.bottom, 10)
+                            VStack{
+                                
+                                Image(systemName: "safari")
+                                    .font(.title)
+                                Text("Explore")
+                                    .font(.headline)
+                            }
+                            .foregroundColor(.black)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(red: 236/255, green: 107/255, blue: 102/255)) //Light Red
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                            .padding(.bottom, 10)
                         }
 
                         NavigationLink(destination: PublishCollectionsView()) {
-                            Text("Publish Collections")
-                                .font(.headline)
+                            VStack{
+                                Image(systemName: "paperplane")
+                                    .font(.title)
+                                Text("Publish")
+                                    .font(.headline)
+                                
+                            }
                                 .foregroundColor(.black)
                                 .padding()
                                 .frame(maxWidth: .infinity)
@@ -106,27 +116,31 @@ struct HomeView: View {
 
                     HStack {
                         NavigationLink(destination: ChatsView()) {
-                            ZStack{
-                                Text("Chats")
-                                    .font(.headline)
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(Color(red: 247/255, green: 227/255, blue: 121/255)) //Yellow
-                                    .cornerRadius(10)
-                                    .shadow(radius: 5)
-                                    .padding(.bottom, 10)
-                                
-                                if hasChats {
-                                    Circle()
-                                        .fill(Color.red)
-                                        .frame(width: 20, height: 20)
-                                        .offset(x: 175, y: -30)
+                            HStack{
+                                ZStack{
+                                    Text("Chats")
+                                        .font(.headline)
                                 }
+                                Image(systemName: "message")
+                                    .font(.title)
                             }
+                            .foregroundColor(.black)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(red: 247/255, green: 227/255, blue: 121/255)) //Yellow
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                            .padding(.bottom, 10)
                         }
                     }
                     .padding(.horizontal)
+                    
+                    if hasChats {
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 20, height: 20)
+                            .offset(x: 175, y: -90)
+                    }
 
                     Spacer()
                     ZStack {
@@ -155,6 +169,7 @@ struct HomeView: View {
                                         .shadow(radius: 5)
                                     Text("View")
                                         .foregroundColor(.black)
+                                        .fontWeight(.bold)
                                 }
                             }
                             .padding()
@@ -164,7 +179,8 @@ struct HomeView: View {
                             NavigationLink(destination: AddComicView()) {
                                 VStack {
                                     ZStack {
-                                        Image(systemName: "plus.circle.fill")
+                                        Image(systemName: "plus.circle")
+                                            .fontWeight(.bold)
                                             .font(.title)
                                             .foregroundColor(.black)
                                             .padding()
@@ -174,6 +190,7 @@ struct HomeView: View {
                                     }
                                     Text("Add")
                                         .foregroundColor(.black)
+                                        .fontWeight(.bold)
                                 }
                             }
 
@@ -181,7 +198,8 @@ struct HomeView: View {
 
                             NavigationLink(destination: PriceListView()) {
                                 VStack {
-                                    Image(systemName: "chart.bar.fill")
+                                    Image(systemName: "chart.bar")
+                                        .fontWeight(.bold)
                                         .font(.title)
                                         .foregroundColor(.black)
                                         .padding()
@@ -190,6 +208,7 @@ struct HomeView: View {
                                         .shadow(radius: 5)
                                     Text("Prices")
                                         .foregroundColor(.black)
+                                        .fontWeight(.bold)
                                 }
                             }
                             .padding()
@@ -254,6 +273,7 @@ struct HomeView: View {
                             }
 
                         }
+                        .border(Color.black, width: 5)
                         .listStyle(SidebarListStyle())
                         .frame(width: 300)
                         .transition(.move(edge: .trailing))
