@@ -10,12 +10,16 @@ import SwiftUI
 struct HomeView: View {
     @State private var isShowingDrawer = false
     
+    //Notification Dots
+    @State private var hasNotifications = false
+    @State private var hasChats = false
+    
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
                     ZStack {
-                        Text("Comic Vault")
+                        Text("ComicVault")
                             .font(.system(size: 36, design: .serif))
                             .fontWeight(.bold)
                             .foregroundColor(.black)
@@ -32,7 +36,7 @@ struct HomeView: View {
                                     .font(.title)
                                     .foregroundColor(.black)
                                     .padding()
-                                    .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                    .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
                                     .clipShape(Circle())
                                     .shadow(radius: 5)
                             }
@@ -41,36 +45,45 @@ struct HomeView: View {
                             Spacer()
                             
                             NavigationLink(destination: NotificationsView()) {
-                                Image(systemName: "bell")
-                                    .font(.title)
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
-                                    .clipShape(Circle())
-                                    .shadow(radius: 5)
+                                ZStack {
+                                    Image(systemName: "bell")
+                                        .font(.title)
+                                        .foregroundColor(.black)
+                                        .padding()
+                                        .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
+                                        .clipShape(Circle())
+                                        .shadow(radius: 5)
+                                    
+                                    if hasNotifications {
+                                        Circle()
+                                            .fill(Color.red)
+                                            .frame(width: 20, height: 20)
+                                            .offset(x: 20, y: -20)
+                                    }
+                                }
+                                .padding()
                             }
-                            .padding()
                         }
                         .frame(maxWidth: .infinity)
                     }
                     .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
 
-                    Spacer()
                     Rectangle()
                         .foregroundColor(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
-                        .frame(height: 200)
+                        .frame(height: 315)
+                        .frame(maxWidth: 275)
                         .cornerRadius(20)
-                        .padding(.top, 10)
-                        .padding(.horizontal)
+                        .padding()
+                    
 
                     HStack {
                         NavigationLink(destination: OthersCollectionsView()) {
-                            Text("Explore Collections")
+                            Text("Explore Collections ")
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                .background(Color(red: 236/255, green: 107/255, blue: 102/255)) //Light Red
                                 .cornerRadius(10)
                                 .shadow(radius: 5)
                                 .padding(.bottom, 10)
@@ -82,7 +95,8 @@ struct HomeView: View {
                                 .foregroundColor(.black)
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                
+                                .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
                                 .cornerRadius(10)
                                 .shadow(radius: 5)
                                 .padding(.bottom, 10)
@@ -92,15 +106,24 @@ struct HomeView: View {
 
                     HStack {
                         NavigationLink(destination: ChatsView()) {
-                            Text("Chats")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
-                                .padding(.bottom, 10)
+                            ZStack{
+                                Text("Chats")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color(red: 247/255, green: 227/255, blue: 121/255)) //Yellow
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                                    .padding(.bottom, 10)
+                                
+                                if hasChats {
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 20, height: 20)
+                                        .offset(x: 175, y: -30)
+                                }
+                            }
                         }
                     }
                     .padding(.horizontal)
@@ -124,9 +147,10 @@ struct HomeView: View {
                                 VStack {
                                     Image(systemName: "square.grid.2x2")
                                         .font(.title)
+                                        .fontWeight(.bold)
                                         .foregroundColor(.black)
                                         .padding()
-                                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                        .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
                                         .clipShape(Circle())
                                         .shadow(radius: 5)
                                     Text("View")
@@ -144,7 +168,7 @@ struct HomeView: View {
                                             .font(.title)
                                             .foregroundColor(.black)
                                             .padding()
-                                            .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                            .background(Color(red: 236/255, green: 107/255, blue: 102/255)) //Light Red
                                             .clipShape(Circle())
                                             .shadow(radius: 5)
                                     }
@@ -161,7 +185,7 @@ struct HomeView: View {
                                         .font(.title)
                                         .foregroundColor(.black)
                                         .padding()
-                                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                        .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
                                         .clipShape(Circle())
                                         .shadow(radius: 5)
                                     Text("Prices")
@@ -226,7 +250,9 @@ struct HomeView: View {
                                     Text("Settings")
                                         .padding()
                                 }
+
                             }
+
                         }
                         .listStyle(SidebarListStyle())
                         .frame(width: 300)
@@ -234,7 +260,7 @@ struct HomeView: View {
                         
                         Spacer()
                     }
-                    .background(Color.primary)
+                    .background(Color.black)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } // Side Drawer //////////////////////////////////////////////////////////////
             }
