@@ -238,49 +238,80 @@ struct HomeView: View {
 
                     VStack {
                         Spacer()
-                        List {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-
-                            Text("John Smith")
-                                .font(.title)
-                            
-
-                            VStack {
-                                Text("Total Comics: 100")
-                                Text("Total Value: $500")
-                            }
-                            .foregroundColor(.gray)
-
-                            Spacer()
-                            
-                            NavigationLink(destination: SettingsView()) {
-                                HStack{
-                                    Image(systemName: "gear")
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(Color.white)
+                        
+                        ScrollView{
+                            LazyVStack{
+                                VStack {
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
                                         .clipShape(Circle())
                                         .shadow(radius: 5)
-                                    Text("Settings")
                                         .padding()
+
+                                    HStack {
+                                        Text("John Smith")
+                                            .font(.system(size: 26, design: .serif))
+                                            .padding()
+                                            .fontWeight(.bold)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color(red: 247/255, green: 227/255, blue: 121/255)) //Yellow
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                                    .padding([.leading, .trailing, .top])
+
+                                    VStack {
+                                        Text("Total Comics: 100")
+                                        Text("Total Value: $500")
+                                    }
+                                    .foregroundColor(.gray)
+                                    .padding([.leading, .trailing, .bottom])
+
+                                    Spacer()
+                                    
+                                    NavigationLink(destination: SettingsView()) {
+                                        HStack{
+                                            Image(systemName: "gear")
+                                                .font(.title)
+                                                
+                                            Text("Settings")
+                                                .fontWeight(.bold)
+                                        }
+                                    }
+                                    
+                                    .foregroundColor(.black)
+                                    .padding()
+                                    .background(Color(red: 236/255, green: 107/255, blue: 102/255)) //Light Red
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                                    .padding()
                                 }
-
+                                .background(Color(red: 231/255, green: 243/255, blue: 254/255)) //Light White/Blue
+                                .cornerRadius(20)
+                                .padding()
                             }
-
                         }
-                        .border(Color.black, width: 5)
                         .listStyle(SidebarListStyle())
-                        .frame(width: 300)
+                        .frame(width: 330)
                         .transition(.move(edge: .trailing))
                         
                         Spacer()
+                        
+                        VStack{
+                            Text("Authors:")
+                                .fontWeight(.bold)
+                                .padding([.leading, .trailing, .top])
+                            Text("Ayman Tauhid, Elias Alissandratos and Omar Al-Dulaimi")
+                                .padding([.leading, .trailing, .bottom])
+                        }
+                        .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                        .padding([.leading, .trailing, .top])
+                        .frame(width: 330)
                     }
-                    .background(Color.black)
+                    .background(Color(red: 70/255, green: 96/255, blue: 115/255)) //Dark Grey/Blue
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } // Side Drawer //////////////////////////////////////////////////////////////
             }
