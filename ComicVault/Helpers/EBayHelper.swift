@@ -9,12 +9,12 @@ import Foundation
 
 class EbayAPIManager {
     // eBay API key constant
-    private let ebayAPIKey = "YOUR_EBAY_API_KEY"
+    private let ebayAPIKey = "SBX-ac3fefa951cf-12de-4286-9067-26e0"
 
     // Function to create the eBay search URL
     private func createEbaySearchURL(forComicName name: String, issueNumber: String) -> URL? {
         let queryItems = [
-            URLQueryItem(name: "_nkw", value: "\(name) issue \(issueNumber)"),
+            URLQueryItem(name: "_nkw", value: "\(name) \(issueNumber)"),
             URLQueryItem(name: "_sacat", value: "0")
         ]
         var urlComponents = URLComponents(string: "https://api.ebay.com/buy/browse/v1/item_summary/search")
@@ -34,11 +34,16 @@ class EbayAPIManager {
         request.addValue("Bearer \(ebayAPIKey)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
+            
             if let error = error {
                 completion(.failure(error))
                 return
             }
-
+            
+            if let jsonData = String(data: data!, encoding: .utf8) {
+                    print("Received JSON: \(jsonData)")
+                }
+            
             guard let data = data else {
                 completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
                 return
@@ -52,6 +57,10 @@ class EbayAPIManager {
                 } else {
                     completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Price not found"])))
                 }
+            } catch let decodingError as DecodingError {
+                print("Decoding error: \(decodingError)")
+                // Handle the specific decoding error here
+                completion(.failure(decodingError))
             } catch {
                 completion(.failure(error))
             }
