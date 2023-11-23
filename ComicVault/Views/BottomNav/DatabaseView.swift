@@ -14,37 +14,35 @@ struct DatabaseView: View {
     @State private var selectedComic: Comic?
     
     var body: some View {
-        ZStack(alignment: .top) {
-            Color(red: 70/255, green: 96/255, blue: 115/255) // Dark Grey/Blue
+        List {
+            ForEach(comics) { comic in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(comic.name).font(.headline)
+                        Text("Issue: \(comic.issueNumber)")
+                        Text("Year: \(comic.releaseYear)")
 
-            VStack {
-                Text("My Comics")
-                    .font(.system(size: 36, design: .serif))
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
-
-                List {
-                    ForEach(comics) { comic in
-                        VStack(alignment: .leading) {
-                            Text(comic.name)
-                                .font(.headline)
-                                .foregroundColor(.black)
-                            Text("Issue: \(comic.issueNumber)")
-                            Text("Year: \(comic.releaseYear)")
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
+//                        Button("Edit") {
+//                            self.selectedComic = comic
+//                            self.isEditingComic = true
+//                        }
+//                        .padding()
+//                        .background(Color.blue)
+//                        .foregroundColor(.white)
+//                        .cornerRadius(10)
                     }
-                    .onDelete(perform: deleteComic)
+                    Button("Edit") {
+                        self.selectedComic = comic
+                        self.isEditingComic = true
+                    }
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .frame(alignment: .trailing)
                 }
-                .listStyle(PlainListStyle())
             }
+            .onDelete(perform: deleteComic)
         }
         .sheet(isPresented: $isEditingComic) {
             if let selectedComic = selectedComic {
@@ -62,7 +60,7 @@ struct DatabaseView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarTitle("My Comics")
     }
 
     private func deleteComic(at offsets: IndexSet) {
