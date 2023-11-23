@@ -8,10 +8,26 @@
 import FirebaseFirestore
 
 class FirestoreManager: ObservableObject {
+    @Published var comics: [Comic] = []
     private let db = Firestore.firestore()
-
     private let ebayAPIManager = EbayAPIManager()
     
+    init() {
+            subscribeToComicsCollection()
+        }
+
+    // Subscribe to the comics collection for real-time updates
+    private func subscribeToComicsCollection() {
+        db.collection("comics").addSnapshotListener { [weak self] (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents in 'comics' collection")
+                return
+            }
+            self?.comics = documents.compactMap { document -> Comic? in
+                try? document.data(as: Comic.self)
+            }
+        }
+    }
     
     //TODO: Doesn't work properly, need fixing...
     // Function to add comic with eBay price
