@@ -1,4 +1,4 @@
-# # ComicVault
+ # ComicVault
 
 ComicVault is an iOS app designed for comic book enthusiasts to manage their comic book collections. It allows users to add comics to their collection, fetch current pricing information from eBay, and store this data in a Firestore database.
 
