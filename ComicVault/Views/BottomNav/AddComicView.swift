@@ -61,6 +61,7 @@ struct AddComicView: View {
                                 name = ""
                                 issueNumber = ""
                                 releaseYear = ""
+                                print("Comic added successfully")
                             case .failure(let error):
                                 alertMessage = error.localizedDescription
                                 showAlert = true

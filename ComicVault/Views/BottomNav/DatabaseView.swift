@@ -14,41 +14,43 @@ struct DatabaseView: View {
     @State private var selectedComic: Comic?
     
     var body: some View {
-        List {
-            ForEach(comics) { comic in
-                VStack(alignment: .leading) {
-                    Text(comic.name).font(.headline)
-                    Text("Issue: \(comic.issueNumber)")
-                    Text("Year: \(comic.releaseYear)")
-                    HStack {
-                        Button("Edit") {
-                            self.selectedComic = comic
-                            self.isEditingComic = true
+        ZStack(alignment: .top) {
+            Color(red: 70/255, green: 96/255, blue: 115/255) // Dark Grey/Blue
+
+            VStack {
+                Text("My Comics")
+                    .font(.system(size: 36, design: .serif))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
+
+                List {
+                    ForEach(comics) { comic in
+                        VStack(alignment: .leading) {
+                            Text(comic.name)
+                                .font(.headline)
+                                .foregroundColor(.black)
+                            Text("Issue: \(comic.issueNumber)")
+                            Text("Year: \(comic.releaseYear)")
                         }
-                        Button("Delete") {
-                            firestoreManager.deleteComic(comic) { result in
-                                switch result {
-                                case .success():
-                                    // Remove the comic from the local array to update the UI
-                                    if let index = self.comics.firstIndex(where: { $0.id == comic.id }) {
-                                        self.comics.remove(at: index)
-                                    }
-                                    print("Comic deleted successfully")
-                                case .failure(let error):
-                                    print("Error deleting comic: \(error.localizedDescription)")
-                                }
-                            }
-                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
                     }
+                    .onDelete(perform: deleteComic)
                 }
+                .listStyle(PlainListStyle())
             }
-            .onDelete(perform: deleteComic)
         }
         .sheet(isPresented: $isEditingComic) {
-                    if let selectedComic = selectedComic {
-                        ComicDetailView(comic: selectedComic, firestoreManager: firestoreManager)
-                    }
-                }
+            if let selectedComic = selectedComic {
+                ComicDetailView(comic: selectedComic, firestoreManager: firestoreManager)
+            }
+        }
         .onAppear {
             firestoreManager.fetchComics { result in
                 switch result {
@@ -60,7 +62,7 @@ struct DatabaseView: View {
                 }
             }
         }
-        .navigationBarTitle("My Comics")
+        .edgesIgnoringSafeArea(.bottom)
     }
 
     private func deleteComic(at offsets: IndexSet) {
@@ -70,3 +72,4 @@ struct DatabaseView: View {
         }
     }
 }
+
