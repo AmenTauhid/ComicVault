@@ -21,16 +21,10 @@ struct DatabaseView: View {
                         Text(comic.name).font(.headline)
                         Text("Issue: \(comic.issueNumber)")
                         Text("Year: \(comic.releaseYear)")
-
-//                        Button("Edit") {
-//                            self.selectedComic = comic
-//                            self.isEditingComic = true
-//                        }
-//                        .padding()
-//                        .background(Color.blue)
-//                        .foregroundColor(.white)
-//                        .cornerRadius(10)
                     }
+                    
+                    Spacer()
+                    
                     Button("Edit") {
                         self.selectedComic = comic
                         self.isEditingComic = true
