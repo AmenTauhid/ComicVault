@@ -15,6 +15,7 @@
 		175ED76C2B0DE52700617929 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED76B2B0DE52700617929 /* FirebaseAuth */; };
 		175ED76E2B0DE52D00617929 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED76D2B0DE52D00617929 /* FirebaseFirestoreSwift */; };
 		175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED77F2B0EC4F200617929 /* ComicDetailView.swift */; };
+		175ED7822B0EEC0400617929 /* EBayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7812B0EEC0400617929 /* EBayHelper.swift */; };
 		179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */; };
 		179BCC512B0D16CB001A0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC502B0D16CB001A0E00 /* Assets.xcassets */; };
 		179BCC542B0D16CB001A0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC532B0D16CB001A0E00 /* Preview Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVineHelper.swift; sourceTree = "<group>"; };
 		175ED7622B0DDC3C00617929 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		175ED77F2B0EC4F200617929 /* ComicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailView.swift; sourceTree = "<group>"; };
+		175ED7812B0EEC0400617929 /* EBayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBayHelper.swift; sourceTree = "<group>"; };
 		179BCC492B0D16CA001A0E00 /* ComicVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComicVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVaultApp.swift; sourceTree = "<group>"; };
 		179BCC502B0D16CB001A0E00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */,
 				175ED7622B0DDC3C00617929 /* FirestoreManager.swift */,
+				175ED7812B0EEC0400617929 /* EBayHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175ED7822B0EEC0400617929 /* EBayHelper.swift in Sources */,
 				64E7FBB02B0D1AB2009A490C /* SettingsView.swift in Sources */,
 				64E7FBB52B0D1AB2009A490C /* NotificationsView.swift in Sources */,
 				64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */,

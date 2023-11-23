@@ -11,4 +11,5 @@ struct Comic: Codable, Identifiable {
     var name: String
     var issueNumber: String
     var releaseYear: String
+    var price: Double?
 }

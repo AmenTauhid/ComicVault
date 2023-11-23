@@ -10,33 +10,33 @@ import FirebaseFirestore
 class FirestoreManager: ObservableObject {
     private let db = Firestore.firestore()
 
-    // Add comic to Firestore
+    private let ebayAPIManager = EbayAPIManager()
+        
+    // Function to add comic with eBay price
+    func addComicWithPrice(name: String, issueNumber: String, releaseYear: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        ebayAPIManager.fetchEbaySearchResults(forComicName: name, issueNumber: issueNumber) { result in
+            switch result {
+            case .success(let price):
+                let comic = Comic(name: name, issueNumber: issueNumber, releaseYear: releaseYear, price: price)
+                self.addComic(comic, completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    // Function to add comic to Firestore
     func addComic(_ comic: Comic, completion: @escaping (Result<Void, Error>) -> Void) {
-        let query = db.collection("comics").whereField("name", isEqualTo: comic.name)
-            .whereField("issueNumber", isEqualTo: comic.issueNumber)
-        query.getDocuments { (snapshot, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            if let snapshot = snapshot, !snapshot.documents.isEmpty {
-                // Comic already exists
-                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Comic already exists"])))
-                return
-            }
-            
-            do {
-                _ = try self.db.collection("comics").document(comic.id).setData(from: comic) { error in
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        completion(.success(()))
-                    }
+        do {
+            _ = try db.collection("comics").document(comic.id).setData(from: comic) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
                 }
-            } catch let error {
-                completion(.failure(error))
             }
+        } catch let error {
+            completion(.failure(error))
         }
     }
 
