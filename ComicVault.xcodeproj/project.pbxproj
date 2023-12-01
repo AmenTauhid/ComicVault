@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172E3BED2B198939004A18CF /* ExtraEbayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E3BEC2B198939004A18CF /* ExtraEbayHelper.swift */; };
+		172E3BEF2B198957004A18CF /* CameraScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E3BEE2B198957004A18CF /* CameraScan.swift */; };
 		175ED75E2B0DDBD400617929 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED75D2B0DDBD400617929 /* Comic.swift */; };
 		175ED7612B0DDBFC00617929 /* ComicVineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */; };
 		175ED7632B0DDC3C00617929 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7622B0DDC3C00617929 /* FirestoreManager.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		172E3BEC2B198939004A18CF /* ExtraEbayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraEbayHelper.swift; sourceTree = "<group>"; };
+		172E3BEE2B198957004A18CF /* CameraScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScan.swift; sourceTree = "<group>"; };
 		175ED75D2B0DDBD400617929 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVineHelper.swift; sourceTree = "<group>"; };
 		175ED7622B0DDC3C00617929 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 				175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */,
 				175ED7622B0DDC3C00617929 /* FirestoreManager.swift */,
 				175ED7812B0EEC0400617929 /* EBayHelper.swift */,
+				172E3BEC2B198939004A18CF /* ExtraEbayHelper.swift */,
+				172E3BEE2B198957004A18CF /* CameraScan.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -274,6 +280,7 @@
 				64E7FBB52B0D1AB2009A490C /* NotificationsView.swift in Sources */,
 				64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */,
 				64E7FBB42B0D1AB2009A490C /* PriceListView.swift in Sources */,
+				172E3BED2B198939004A18CF /* ExtraEbayHelper.swift in Sources */,
 				64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */,
 				175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */,
 				64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */,
@@ -284,6 +291,7 @@
 				175ED7612B0DDBFC00617929 /* ComicVineHelper.swift in Sources */,
 				64E7FBB12B0D1AB2009A490C /* OthersCollectionsView.swift in Sources */,
 				64E7FBB22B0D1AB2009A490C /* AddComicView.swift in Sources */,
+				172E3BEF2B198957004A18CF /* CameraScan.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

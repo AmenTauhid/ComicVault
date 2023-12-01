@@ -32,7 +32,7 @@ class FirestoreManager: ObservableObject {
     //TODO: Doesn't work properly, need fixing...
     // Function to add comic with eBay price
     func addComicWithPrice(name: String, issueNumber: String, releaseYear: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        ebayAPIManager.fetchEbaySearchResults(forComicName: name, issueNumber: issueNumber) { result in
+        ebayAPIManager.fetchEbaySearchResults(forComicName: name, issueNumber: issueNumber, releaseYear: releaseYear) { result in
             switch result {
             case .success(let price):
                 let comic = Comic(name: name, issueNumber: issueNumber, releaseYear: releaseYear, price: price)

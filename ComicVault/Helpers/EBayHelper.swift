@@ -9,59 +9,56 @@ import Foundation
 
 class EbayAPIManager {
     // eBay API key constant
-    private let ebayAPIKey = "SBX-ac3fefa951cf-12de-4286-9067-26e0"
+    private let ebayAPIKey = "OmarAlDu-ComicVau-PRD-ff4c095ff-f4147499"  // Replace with your actual eBay API key
 
-    // Function to create the eBay search URL
-    private func createEbaySearchURL(forComicName name: String, issueNumber: String) -> URL? {
-        let queryItems = [
-            URLQueryItem(name: "_nkw", value: "\(name) \(issueNumber)"),
-            URLQueryItem(name: "_sacat", value: "0")
-        ]
-        var urlComponents = URLComponents(string: "https://api.ebay.com/buy/browse/v1/item_summary/search")
-        urlComponents?.queryItems = queryItems
-        return urlComponents?.url
+    // Function to create the eBay Finding API search URL
+    private func createEbaySearchURL(forComicName name: String, issueNumber: String, releaseYear: String) -> URL? {
+        let formattedQuery = "\(name) \(issueNumber) \(releaseYear)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url = URL(string: "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.13.0&SECURITY-APPNAME=\(ebayAPIKey)&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=\(formattedQuery ?? "")&GLOBAL-ID=EBAY-ENCA")
+        return url
     }
 
-    // Function to fetch eBay search results
-    func fetchEbaySearchResults(forComicName name: String, issueNumber: String, completion: @escaping (Result<Double, Error>) -> Void) {
-        guard let url = createEbaySearchURL(forComicName: name, issueNumber: issueNumber) else {
+    // Function to fetch eBay Finding API search results
+    func fetchEbaySearchResults(forComicName name: String, issueNumber: String, releaseYear: String, completion: @escaping (Result<Double, Error>) -> Void) {
+        guard let url = createEbaySearchURL(forComicName: name, issueNumber: issueNumber, releaseYear: releaseYear) else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.addValue("Bearer \(ebayAPIKey)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            
             if let error = error {
                 completion(.failure(error))
                 return
             }
-            
-            if let jsonData = String(data: data!, encoding: .utf8) {
-                    print("Received JSON: \(jsonData)")
-                }
-            
+
             guard let data = data else {
                 completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
                 return
             }
 
             do {
-                let response = try JSONDecoder().decode(EbaySearchResponse.self, from: data)
-                if let firstItemPrice = response.itemSummaries.first?.price?.value,
-                   let price = Double(firstItemPrice) {
-                    completion(.success(price))
+                // Parse the response to extract prices
+                let responseDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                if let searchResult = responseDict?["findItemsByKeywordsResponse"] as? [[String: Any]],
+                   let items = searchResult.first?["searchResult"] as? [[String: Any]],
+                   let itemArray = items.first?["item"] as? [[String: Any]] {
+                    let prices = itemArray.prefix(10).compactMap { item -> Double? in
+                        if let sellingStatus = item["sellingStatus"] as? [[String: Any]],
+                           let currentPriceArray = sellingStatus.first?["currentPrice"] as? [[String: Any]],
+                           let priceValue = currentPriceArray.first?["__value__"] as? String {
+                            return Double(priceValue)
+                        }
+                        return nil
+                    }
+                    let averagePrice = prices.reduce(0, +) / Double(prices.count)
+                    completion(.success(averagePrice))
                 } else {
                     completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Price not found"])))
                 }
-            } catch let decodingError as DecodingError {
-                print("Decoding error: \(decodingError)")
-                // Handle the specific decoding error here
-                completion(.failure(decodingError))
-            } catch {
+            } catch let error {
                 completion(.failure(error))
             }
         }.resume()

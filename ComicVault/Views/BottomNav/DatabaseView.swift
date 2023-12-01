@@ -19,6 +19,11 @@ struct DatabaseView: View {
                         Text(comic.name).font(.headline)
                         Text("Issue: \(comic.issueNumber)")
                         Text("Year: \(comic.releaseYear)")
+                        if let price = comic.price {
+                            Text("Price: $\(price, specifier: "%.2f")")
+                        } else {
+                            Text("Price: N/A")
+                        }
                     }
                     
                     Spacer()
