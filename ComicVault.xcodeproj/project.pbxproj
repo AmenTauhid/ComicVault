@@ -10,7 +10,7 @@
 		172E3BED2B198939004A18CF /* ExtraEbayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E3BEC2B198939004A18CF /* ExtraEbayHelper.swift */; };
 		172E3BEF2B198957004A18CF /* CameraScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E3BEE2B198957004A18CF /* CameraScan.swift */; };
 		175ED75E2B0DDBD400617929 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED75D2B0DDBD400617929 /* Comic.swift */; };
-		175ED7612B0DDBFC00617929 /* ComicVineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */; };
+		175ED7612B0DDBFC00617929 /* TextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7602B0DDBFC00617929 /* TextExtractor.swift */; };
 		175ED7632B0DDC3C00617929 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7622B0DDC3C00617929 /* FirestoreManager.swift */; };
 		175ED7672B0DDDE300617929 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED7662B0DDDE300617929 /* CodeScanner */; };
 		175ED76A2B0DE51800617929 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED7692B0DE51800617929 /* FirebaseFirestore */; };
@@ -18,6 +18,10 @@
 		175ED76E2B0DE52D00617929 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 175ED76D2B0DE52D00617929 /* FirebaseFirestoreSwift */; };
 		175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED77F2B0EC4F200617929 /* ComicDetailView.swift */; };
 		175ED7822B0EEC0400617929 /* EBayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175ED7812B0EEC0400617929 /* EBayHelper.swift */; };
+		177543E42B1ED553008B6990 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177543E32B1ED553008B6990 /* LoginView.swift */; };
+		177543E82B1ED6BD008B6990 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177543E72B1ED6BD008B6990 /* SignUpView.swift */; };
+		177543EA2B1ED78E008B6990 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177543E92B1ED78E008B6990 /* AuthViewModel.swift */; };
+		177543EC2B1EDA5C008B6990 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177543EB2B1EDA5C008B6990 /* RootView.swift */; };
 		179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */; };
 		179BCC512B0D16CB001A0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC502B0D16CB001A0E00 /* Assets.xcassets */; };
 		179BCC542B0D16CB001A0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179BCC532B0D16CB001A0E00 /* Preview Assets.xcassets */; };
@@ -42,10 +46,14 @@
 		172E3BEC2B198939004A18CF /* ExtraEbayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraEbayHelper.swift; sourceTree = "<group>"; };
 		172E3BEE2B198957004A18CF /* CameraScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScan.swift; sourceTree = "<group>"; };
 		175ED75D2B0DDBD400617929 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
-		175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVineHelper.swift; sourceTree = "<group>"; };
+		175ED7602B0DDBFC00617929 /* TextExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtractor.swift; sourceTree = "<group>"; };
 		175ED7622B0DDC3C00617929 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		175ED77F2B0EC4F200617929 /* ComicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailView.swift; sourceTree = "<group>"; };
 		175ED7812B0EEC0400617929 /* EBayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBayHelper.swift; sourceTree = "<group>"; };
+		177543E32B1ED553008B6990 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		177543E72B1ED6BD008B6990 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		177543E92B1ED78E008B6990 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		177543EB2B1EDA5C008B6990 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		179BCC492B0D16CA001A0E00 /* ComicVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComicVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179BCC4C2B0D16CA001A0E00 /* ComicVaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicVaultApp.swift; sourceTree = "<group>"; };
 		179BCC502B0D16CB001A0E00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				175ED75D2B0DDBD400617929 /* Comic.swift */,
+				177543E92B1ED78E008B6990 /* AuthViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -93,7 +102,7 @@
 		175ED7642B0DDC4000617929 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				175ED7602B0DDBFC00617929 /* ComicVineHelper.swift */,
+				175ED7602B0DDBFC00617929 /* TextExtractor.swift */,
 				175ED7622B0DDC3C00617929 /* FirestoreManager.swift */,
 				175ED7812B0EEC0400617929 /* EBayHelper.swift */,
 				172E3BEC2B198939004A18CF /* ExtraEbayHelper.swift */,
@@ -181,7 +190,10 @@
 		64E7FBB72B0D1AD5009A490C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				177543E32B1ED553008B6990 /* LoginView.swift */,
 				64E7FBAB2B0D1AB2009A490C /* HomeView.swift */,
+				177543E72B1ED6BD008B6990 /* SignUpView.swift */,
+				177543EB2B1EDA5C008B6990 /* RootView.swift */,
 				644CCC862B0E89FD0027D9D0 /* TopNav */,
 				644CCC852B0E89E20027D9D0 /* MainContent */,
 				644CCC842B0E89C70027D9D0 /* BottomNav */,
@@ -275,20 +287,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				177543EA2B1ED78E008B6990 /* AuthViewModel.swift in Sources */,
 				175ED7822B0EEC0400617929 /* EBayHelper.swift in Sources */,
 				64E7FBB02B0D1AB2009A490C /* SettingsView.swift in Sources */,
 				64E7FBB52B0D1AB2009A490C /* NotificationsView.swift in Sources */,
 				64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */,
 				64E7FBB42B0D1AB2009A490C /* PriceListView.swift in Sources */,
+				177543E82B1ED6BD008B6990 /* SignUpView.swift in Sources */,
 				172E3BED2B198939004A18CF /* ExtraEbayHelper.swift in Sources */,
 				64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */,
 				175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */,
 				64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */,
+				177543EC2B1EDA5C008B6990 /* RootView.swift in Sources */,
 				179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */,
 				175ED7632B0DDC3C00617929 /* FirestoreManager.swift in Sources */,
 				175ED75E2B0DDBD400617929 /* Comic.swift in Sources */,
+				177543E42B1ED553008B6990 /* LoginView.swift in Sources */,
 				64E7FBB32B0D1AB2009A490C /* HomeView.swift in Sources */,
-				175ED7612B0DDBFC00617929 /* ComicVineHelper.swift in Sources */,
+				175ED7612B0DDBFC00617929 /* TextExtractor.swift in Sources */,
 				64E7FBB12B0D1AB2009A490C /* OthersCollectionsView.swift in Sources */,
 				64E7FBB22B0D1AB2009A490C /* AddComicView.swift in Sources */,
 				172E3BEF2B198957004A18CF /* CameraScan.swift in Sources */,
@@ -428,6 +444,7 @@
 				DEVELOPMENT_TEAM = P8UJ79LC44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan comic book covers for text recognition.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -438,6 +455,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = sheridan.omario.ComicVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -457,6 +475,7 @@
 				DEVELOPMENT_TEAM = P8UJ79LC44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan comic book covers for text recognition.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -467,6 +486,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = sheridan.omario.ComicVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

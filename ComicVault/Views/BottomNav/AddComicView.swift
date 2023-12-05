@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Vision
 
 struct AddComicView: View {
     @State private var name: String = ""
@@ -53,24 +54,9 @@ struct AddComicView: View {
                         .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
                         .cornerRadius(50)
                         .shadow(radius: 5)
-
+                    
                     Button("Submit") {
                         submitComic()
-//                        let comic = Comic(name: name, issueNumber: issueNumber, releaseYear: releaseYear)
-//                        firestoreManager.addComic(comic) { result in
-//                            switch result {
-//                            case .success():
-//                                alertMessage = "Comic added successfully"
-//                                showAlert = true
-//                                name = ""
-//                                issueNumber = ""
-//                                releaseYear = ""
-//                                print("Comic added successfully")
-//                            case .failure(let error):
-//                                alertMessage = error.localizedDescription
-//                                showAlert = true
-//                            }
-//                        }
                     }
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -82,7 +68,7 @@ struct AddComicView: View {
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text("Message"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                     }
-
+                    
                     ZStack{
                         Divider()
                             .background(Color.black)
@@ -92,55 +78,85 @@ struct AddComicView: View {
                             .padding()
                             .font(.title2)
                     }
+                    
+                    Button("Scan Comic") {
+                        self.showCameraSheet = true
+                    }
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(width: 200)
+                    .background(Color.yellow) // Light Red
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                    .sheet(isPresented: $showCameraSheet) {
+                        ImagePicker(image: self.$capturedImage, sourceType: .camera)
+                    }
+                    .onChange(of: capturedImage) { newImage in
+                        if let validImage = newImage {
+                            TextExtractor.recognizeText(from: validImage) { extractedTexts in
+                                // Clear existing values
+                                self.name = ""
+                                self.issueNumber = ""
+                                self.releaseYear = ""
 
-//                    Button("Scan Upc") {
-//                        showCameraSheet.toggle()
-//                    }
-//                    .sheet(isPresented: $showCameraSheet) {
-//                        CameraClickView(selectedImage: $capturedImage, isPresented: $showCameraSheet, barcodeResults: $barcodeResults)
-//                            .onDisappear {
-//                                updateBarcodeResults()
-//                            }
-//                    }
-//                    .fontWeight(.bold)
-//                    .foregroundColor(.black)
-//                    .padding()
-//                    .frame(width: 200)
-//                    .background(Color(red: 247/255, green: 227/255, blue: 121/255)) //Yellow
-//                    .cornerRadius(10)
-//                    .shadow(radius: 5)
+                                // Join all lines of text into a single string for easier pattern matching
+                                let fullText = extractedTexts.joined(separator: " ")
+                                print(fullText)
+                                
+                                // Extract specific information
+                                self.issueNumber = TextExtractor.extractIssueNumber(from: fullText)
+                                
+                                // Assuming we extract the month and use the current year as release year
+                                if let month = TextExtractor.extractMonth(from: fullText) {
+                                    self.releaseYear = "\(month)"
+                                }
+                                
+                                // Extract the comic name
+                                self.name = TextExtractor.extractComicName(from: fullText)
+                            }
+                        }
+                    }
 
-//                    if !barcodeResults.isEmpty {
-//                        VStack {
-//                            Text("Detected Barcodes:")
-//                                .foregroundColor(.black)
-//                                .padding()
-//
-//                            ForEach(barcodeResults, id: \.self) { barcode in
-//                                Text(barcode)
-//                                    .foregroundColor(.black)
-//                                    .padding()
-//                            }
-//
-//                            Button("Search on eBay") {
-//                                searchOnEbayForBarcodes()
-//                            }
-//                            .padding()
-//                            .foregroundColor(.white)
-//                            .background(Color.blue)
-//                            .cornerRadius(10)
-//                            .shadow(radius: 5)
-//                        }
-//                        .background(Color.white)
-//                        .cornerRadius(10)
-//                        .padding()
-//                        .shadow(radius: 5)
-//                    }
                 }
                 .padding(.top, 36)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
+    }
+    
+    // Image Picker Struct
+    struct ImagePicker: UIViewControllerRepresentable {
+        @Binding var image: UIImage?
+        let sourceType: UIImagePickerController.SourceType
+        
+        func makeUIViewController(context: Context) -> UIImagePickerController {
+            let picker = UIImagePickerController()
+            picker.delegate = context.coordinator
+            picker.sourceType = sourceType
+            return picker
+        }
+        
+        func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+        
+        func makeCoordinator() -> Coordinator {
+            Coordinator(self)
+        }
+        
+        class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+            let parent: ImagePicker
+            
+            init(_ parent: ImagePicker) {
+                self.parent = parent
+            }
+            
+            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                if let image = info[.originalImage] as? UIImage {
+                    parent.image = image
+                }
+                picker.dismiss(animated: true)
+            }
+        }
     }
     
     private func submitComic() {
@@ -163,60 +179,27 @@ struct AddComicView: View {
         releaseYear = ""
     }
     
-    private func updateBarcodeResults() {
-        // Update barcodeResults or perform any other action with the detected barcodes
-        print("Detected Barcodes: \(barcodeResults.joined(separator: ", "))")
-    }
+    private func recognizeText(from image: UIImage, completion: @escaping ([String]) -> Void) {
+        guard let cgImage = image.cgImage else {
+            completion([])
+            return
+        }
 
-//    private func searchOnEbayForBarcodes() {
-//        // Iterate through the detected barcodes and perform eBay search
-//        for barcode in barcodeResults {
-//            // Call the function to search on eBay with the barcode
-//            searchOnEbayByUPC(upc: barcode)
-//        }
-//    }
-//
-//    private func searchOnEbayByUPC(upc: String) {
-//        // eBay Browse API endpoint for searching by UPC
-//        let endpoint = "https://api.ebay.com/buy/browse/v1/item_summary/search?q=UPC:\(upc)"
-//
-//        // Replace "YOUR_ACCESS_TOKEN" with your actual eBay API access token
-//        let accessToken = "v^1.1#i^1#I^3#p^3#r^1#f^0#t^Ul4xMF8wOjI4NzQxRUI4RTBGRjBEMDEyM0I3Q0IxNzVDOUREREMxXzNfMSNFXjEyODQ="
-//
-//        guard let url = URL(string: endpoint) else {
-//            print("Invalid URL")
-//            return
-//        }
-//
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "GET"
-//        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let error = error {
-//                print("Error: \(error)")
-//                return
-//            }
-//
-//            guard let httpResponse = response as? HTTPURLResponse,
-//                  (200...299).contains(httpResponse.statusCode) else {
-//                print("Invalid response")
-//                return
-//            }
-//
-//            if let data = data {
-//                do {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print(json)
-//                    // Parse and handle the response JSON here
-//                } catch {
-//                    print("Error parsing JSON: \(error)")
-//                }
-//            }
-//        }
-//
-//        task.resume()
-//    }
+        let request = VNRecognizeTextRequest { request, error in
+            guard let observations = request.results as? [VNRecognizedTextObservation],
+                  error == nil else {
+                completion([])
+                return
+            }
+            let recognizedStrings = observations.compactMap { observation in
+                observation.topCandidates(1).first?.string
+            }
+            completion(recognizedStrings)
+        }
+        
+        let requestHandler = VNImageRequestHandler(cgImage: cgImage)
+        try? requestHandler.perform([request])
+    }
 }
 
 struct AddComicView_Previews: PreviewProvider {

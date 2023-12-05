@@ -63,6 +63,61 @@ class EbayAPIManager {
             }
         }.resume()
     }
+    
+    // Function to create the eBay Finding API search URL for UPC
+    private func createEbaySearchURLByUPC(upc: String) -> URL? {
+        let url = URL(string: "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByProduct&SERVICE-VERSION=1.13.0&SECURITY-APPNAME=\(ebayAPIKey)&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&productId.@type=UPC&productId=\(upc)")
+        return url
+    }
+
+        // Function to fetch eBay Finding API search results by UPC
+    func fetchEbaySearchResultsByUPC(upc: String, completion: @escaping (Result<Double, Error>) -> Void) {
+        guard let url = createEbaySearchURLByUPC(upc: upc) else {
+            completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                return
+            }
+            
+            do {
+                let responseDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                if let searchResult = responseDict?["findItemsByProductResponse"] as? [[String: Any]],
+                   let items = searchResult.first?["searchResult"] as? [[String: Any]],
+                   let itemArray = items.first?["item"] as? [[String: Any]] {
+                    let prices = itemArray.prefix(10).compactMap { item -> Double? in
+                        if let sellingStatus = item["sellingStatus"] as? [[String: Any]],
+                           let currentPriceArray = sellingStatus.first?["currentPrice"] as? [[String: Any]],
+                           let priceValue = currentPriceArray.first?["__value__"] as? String {
+                            return Double(priceValue)
+                        }
+                        return nil
+                    }
+                    if !prices.isEmpty {
+                        let averagePrice = prices.reduce(0, +) / Double(prices.count)
+                        completion(.success(averagePrice))
+                    } else {
+                        completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No prices found"])))
+                    }
+                } else {
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No items found"])))
+                }
+            } catch let error {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
 }
 
 // Structs to decode the eBay API response

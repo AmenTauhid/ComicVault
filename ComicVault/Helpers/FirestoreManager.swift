@@ -29,7 +29,6 @@ class FirestoreManager: ObservableObject {
         }
     }
     
-    //TODO: Doesn't work properly, need fixing...
     // Function to add comic with eBay price
     func addComicWithPrice(name: String, issueNumber: String, releaseYear: String, completion: @escaping (Result<Void, Error>) -> Void) {
         ebayAPIManager.fetchEbaySearchResults(forComicName: name, issueNumber: issueNumber, releaseYear: releaseYear) { result in
@@ -37,6 +36,21 @@ class FirestoreManager: ObservableObject {
             case .success(let price):
                 let comic = Comic(name: name, issueNumber: issueNumber, releaseYear: releaseYear, price: price)
                 self.addComic(comic, completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func addComicWithPriceByUPC(upc: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        ebayAPIManager.fetchEbaySearchResultsByUPC(upc: upc) { [weak self] result in
+            switch result {
+            case .success(let averagePrice):
+                // Create a comic instance with the average price and the UPC
+                // Since the UPC search does not provide specific comic details like name or issue,
+                // you might need to handle these fields accordingly.
+                let comic = Comic(name: "Unknown", issueNumber: "Unknown", releaseYear: "Unknown", price: averagePrice)
+                self?.addComic(comic, completion: completion)
             case .failure(let error):
                 completion(.failure(error))
             }
