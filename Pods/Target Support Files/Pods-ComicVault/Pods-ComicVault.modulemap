@@ -1,0 +1,6 @@
+framework module Pods_ComicVault {
+  umbrella header "Pods-ComicVault-umbrella.h"
+
+  export *
+  module * { export * }
+}

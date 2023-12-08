@@ -441,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ComicVault/Preview Content\"";
-				DEVELOPMENT_TEAM = P8UJ79LC44;
+				DEVELOPMENT_TEAM = NW93ULW7FN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan comic book covers for text recognition.";
@@ -456,7 +456,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = sheridan.omario.ComicVault;
+				PRODUCT_BUNDLE_IDENTIFIER = sheridan.oa.omario.ComicVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -472,7 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ComicVault/Preview Content\"";
-				DEVELOPMENT_TEAM = P8UJ79LC44;
+				DEVELOPMENT_TEAM = NW93ULW7FN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan comic book covers for text recognition.";
@@ -487,7 +487,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = sheridan.omario.ComicVault;
+				PRODUCT_BUNDLE_IDENTIFIER = sheridan.oa.omario.ComicVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

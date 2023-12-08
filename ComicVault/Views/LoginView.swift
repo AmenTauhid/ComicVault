@@ -1,36 +1,31 @@
-//
-//  LoginView.swift
-//  ComicVault
-//
-//  Created by Omar Al-Dulaimi on 2023-12-04.
-//
-
 import SwiftUI
 import Firebase
 
-extension AuthViewModel {
-    func saveUserData(email: String, completion: @escaping (Bool) -> Void) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            completion(false)
-            return
-        }
-        let db = Firestore.firestore()
-        db.collection("users").document(userId).setData(["email": email]) { error in
-            completion(error == nil)
+class LoginViewModel: ObservableObject {
+    func login(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success("Login successful!"))
+            }
         }
     }
 }
 
 struct LoginView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject var viewModel = LoginViewModel()
+    
     @State private var email = ""
     @State private var password = ""
-    @State private var isShowingSignUp = false
     @State private var errorMessage: String?
+    @State private var isPasswordValid = false
+    @State private var navigateToHome = false
+    @State private var navigateToSignUp = false
 
     var body: some View {
-        VStack {
-            if isShowingSignUp {
+        NavigationView {
+            VStack {
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -38,44 +33,66 @@ struct LoginView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                    .onChange(of: password, perform: { newPassword in
+                        isPasswordValid = isValidPassword(newPassword)
+                    })
+                    .background(isPasswordValid ? Color.green.opacity(0.3) : Color.red.opacity(0.3))
+                    .cornerRadius(8)
 
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
                 }
 
-                Button("Sign Up") {
-                    authViewModel.signUp(email: email, password: password)
-                }
-                .padding()
-            } else {
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                NavigationLink(
+                    destination: HomeView(),
+                    isActive: $navigateToHome,
+                    label: {
+                        Button("Login") {
+                            if isValidEmail(email) && isPasswordValid {
+                                viewModel.login(email: email, password: password) { result in
+                                    switch result {
+                                    case .success(let message):
+                                        errorMessage = message
+                                        // If login is successful, set navigateToHome to true
+                                        if errorMessage == "Login successful!" {
+                                            navigateToHome = true
+                                        }
+                                    case .failure(let error):
+                                        errorMessage = "Error: \(error.localizedDescription)"
+                                    }
+                                }
+                            } else {
+                                errorMessage = "Invalid email or password"
+                            }
+                        }
+                        .padding()
+                        .disabled(!isPasswordValid)
+                    }
+                )
 
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-
-                if let errorMessage = errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                }
-
-                Button("Login") {
-                    authViewModel.login(email: email, password: password)
-                }
-                .padding()
-            }
-
-            Button(isShowingSignUp ? "Already have an account? Log In" : "Don't have an account? Sign Up") {
-                isShowingSignUp.toggle()
+                NavigationLink(
+                    destination: SignUpView(),
+                    isActive: $navigateToSignUp,
+                    label: {
+                        Button("Don't have an account? Sign up now.") {
+                            navigateToSignUp = true
+                        }
+                        .padding()
+                    }
+                )
             }
             .padding()
-
-            Spacer()
         }
-        .navigationBarTitle(isShowingSignUp ? "Sign Up" : "Login", displayMode: .inline)
-        .padding()
+    }
+
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "^[a-zA-Z0-9._%+-]+@(hotmail|gmail|outlook)\\.[a-zA-Z]{2,}$"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+    }
+
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-\\?])[A-Za-z0-9!@#$%^&*()_+\\-\\?]{6,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
 }
