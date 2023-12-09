@@ -40,6 +40,7 @@
 		64E7FBB42B0D1AB2009A490C /* PriceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAC2B0D1AB2009A490C /* PriceListView.swift */; };
 		64E7FBB52B0D1AB2009A490C /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA92B0D1AB1009A490C /* NotificationsView.swift */; };
 		64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAA2B0D1AB2009A490C /* DatabaseView.swift */; };
+		DC7273972B2412AF00DC5A9A /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7273962B2412AF00DC5A9A /* LaunchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		64E7FBAB2B0D1AB2009A490C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		64E7FBAC2B0D1AB2009A490C /* PriceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListView.swift; sourceTree = "<group>"; };
 		64E7FBAD2B0D1AB2009A490C /* PublishCollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCollectionsView.swift; sourceTree = "<group>"; };
+		DC7273962B2412AF00DC5A9A /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				64E7FBAB2B0D1AB2009A490C /* HomeView.swift */,
 				177543E72B1ED6BD008B6990 /* SignUpView.swift */,
 				177543EB2B1EDA5C008B6990 /* RootView.swift */,
+				DC7273962B2412AF00DC5A9A /* LaunchView.swift */,
 				644CCC862B0E89FD0027D9D0 /* TopNav */,
 				644CCC852B0E89E20027D9D0 /* MainContent */,
 				644CCC842B0E89C70027D9D0 /* BottomNav */,
@@ -297,6 +300,7 @@
 				172E3BED2B198939004A18CF /* ExtraEbayHelper.swift in Sources */,
 				64E7FBB62B0D1AB2009A490C /* DatabaseView.swift in Sources */,
 				175ED7802B0EC4F200617929 /* ComicDetailView.swift in Sources */,
+				DC7273972B2412AF00DC5A9A /* LaunchView.swift in Sources */,
 				64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */,
 				177543EC2B1EDA5C008B6990 /* RootView.swift in Sources */,
 				179BCC4D2B0D16CA001A0E00 /* ComicVaultApp.swift in Sources */,
@@ -456,7 +460,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = sheridan.oa.omario.ComicVault;
+				PRODUCT_BUNDLE_IDENTIFIER = sheridan.omario.ComicVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -487,7 +491,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = sheridan.oa.omario.ComicVault;
+				PRODUCT_BUNDLE_IDENTIFIER = sheridan.omario.ComicVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

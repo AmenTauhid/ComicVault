@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseAuth
 
 class FirestoreManager: ObservableObject {
     @Published var comics: [Comic] = []
@@ -13,14 +14,15 @@ class FirestoreManager: ObservableObject {
     private let ebayAPIManager = EbayAPIManager()
     
     init() {
-            subscribeToComicsCollection()
+        if let userID = Auth.auth().currentUser?.uid {
+            subscribeToComicsCollection(userID: userID)
         }
-
-    // Subscribe to the comics collection for real-time updates
-    private func subscribeToComicsCollection() {
-        db.collection("comics").addSnapshotListener { [weak self] (querySnapshot, error) in
+    }
+    
+    private func subscribeToComicsCollection(userID: String) {
+        db.collection("users").document(userID).collection("comics").addSnapshotListener { [weak self] (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                print("No documents in 'comics' collection")
+                print("No documents in 'comics' collection for user \(userID)")
                 return
             }
             self?.comics = documents.compactMap { document -> Comic? in
@@ -57,10 +59,14 @@ class FirestoreManager: ObservableObject {
         }
     }
     
-    // Function to add comic to Firestore
     func addComic(_ comic: Comic, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(.failure(NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))
+            return
+        }
+        
         do {
-            _ = try db.collection("comics").document(comic.id).setData(from: comic) { error in
+            _ = try db.collection("users").document(userID).collection("comics").document(comic.id).setData(from: comic) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {
@@ -71,27 +77,35 @@ class FirestoreManager: ObservableObject {
             completion(.failure(error))
         }
     }
-
-    // Fetch comics from Firestore
+    
     func fetchComics(completion: @escaping (Result<[Comic], Error>) -> Void) {
-        db.collection("comics").getDocuments { snapshot, error in
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(.failure(NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))
+            return
+        }
+        
+        db.collection("users").document(userID).collection("comics").getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
-
+            
             let comics = snapshot?.documents.compactMap { document -> Comic? in
                 try? document.data(as: Comic.self)
             } ?? []
-
+            
             completion(.success(comics))
         }
     }
-
-    // Update comic in Firestore
+    
     func updateComic(_ comic: Comic, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(.failure(NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))
+            return
+        }
+        
         do {
-            try db.collection("comics").document(comic.id).setData(from: comic) { error in
+            try db.collection("users").document(userID).collection("comics").document(comic.id).setData(from: comic) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {
@@ -102,10 +116,14 @@ class FirestoreManager: ObservableObject {
             completion(.failure(error))
         }
     }
-
-    // Delete comic from Firestore
+    
     func deleteComic(_ comic: Comic, completion: @escaping (Result<Void, Error>) -> Void) {
-        db.collection("comics").document(comic.id).delete() { error in
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(.failure(NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))
+            return
+        }
+        
+        db.collection("users").document(userID).collection("comics").document(comic.id).delete() { error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -114,4 +132,3 @@ class FirestoreManager: ObservableObject {
         }
     }
 }
-

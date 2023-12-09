@@ -33,6 +33,8 @@ class SignUpViewModel: ObservableObject {
 }
 
 struct SignUpView: View {
+    @Binding var rootView : RootView
+
     @StateObject var viewModel = SignUpViewModel()
 
     @State private var email = ""
@@ -52,7 +54,7 @@ struct SignUpView: View {
             TextField("Email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-                .foregroundColor(.black)
+//                .foregroundColor(.black)
 
             SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())

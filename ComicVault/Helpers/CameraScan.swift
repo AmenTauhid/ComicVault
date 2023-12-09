@@ -1,3 +1,11 @@
+
+//
+//  ComicVaultApp.swift
+//  ComicVault
+//
+//  Created by Omar Al-Dulaimi on 2023-11-21.
+//
+
 import Foundation
 import SwiftUI
 import PhotosUI

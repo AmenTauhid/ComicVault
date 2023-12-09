@@ -1,9 +1,10 @@
 //
-//  DatabaseView.swift
+//  PriceListView.swift
 //  ComicVault
 //
-//  Created by Elias Alissandratos on 2023-11-20.
+//  Created by Omar Al-Dulaimi on 2023-12-6.
 //
+
 import SwiftUI
 
 struct DatabaseView: View {
@@ -14,30 +15,7 @@ struct DatabaseView: View {
     var body: some View {
         List {
             ForEach(firestoreManager.comics) { comic in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(comic.name).font(.headline)
-                        Text("Issue: \(comic.issueNumber)")
-                        Text("Year: \(comic.releaseYear)")
-                        if let price = comic.price {
-                            Text("Price: $\(price, specifier: "%.2f")")
-                        } else {
-                            Text("Price: N/A")
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    Button("Edit") {
-                        self.selectedComic = comic
-                        self.isEditingComic = true
-                    }
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .frame(alignment: .trailing)
-                }
+                ComicRow(comic: comic)
             }
             .onDelete(perform: deleteComic)
         }
@@ -46,13 +24,44 @@ struct DatabaseView: View {
                 ComicDetailView(firestoreManager: firestoreManager, comic: selectedComic)
             }
         }
-        .navigationBarTitle("My Comics")
+        .navigationTitle("My Comics")
     }
 
     private func deleteComic(at offsets: IndexSet) {
         offsets.forEach { index in
             let comic = firestoreManager.comics[index]
             firestoreManager.deleteComic(comic) { _ in }
+        }
+    }
+}
+
+struct ComicRow: View {
+    let comic: Comic
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(comic.name)
+                    .font(.headline)
+                Text("Issue: \(comic.issueNumber)")
+                Text("Year: \(comic.releaseYear)")
+                if let price = comic.price {
+                    Text("Price: $\(price, specifier: "%.2f")")
+                } else {
+                    Text("Price: N/A")
+                }
+            }
+            
+            Spacer()
+            
+            Button("Edit") {
+                // Handle edit action
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .frame(alignment: .trailing)
         }
     }
 }

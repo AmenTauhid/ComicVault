@@ -14,14 +14,13 @@ class LoginViewModel: ObservableObject {
 }
 
 struct LoginView: View {
+    @Binding var rootView: RootView
+
     @StateObject var viewModel = LoginViewModel()
-    
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
     @State private var isPasswordValid = false
-    @State private var navigateToHome = false
-    @State private var navigateToSignUp = false
 
     var body: some View {
         NavigationView {
@@ -33,9 +32,9 @@ struct LoginView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    .onChange(of: password, perform: { newPassword in
+                    .onChange(of: password) { newPassword in
                         isPasswordValid = isValidPassword(newPassword)
-                    })
+                    }
                     .background(isPasswordValid ? Color.green.opacity(0.3) : Color.red.opacity(0.3))
                     .cornerRadius(8)
 
@@ -44,43 +43,27 @@ struct LoginView: View {
                         .foregroundColor(.red)
                 }
 
-                NavigationLink(
-                    destination: HomeView(),
-                    isActive: $navigateToHome,
-                    label: {
-                        Button("Login") {
-                            if isValidEmail(email) && isPasswordValid {
-                                viewModel.login(email: email, password: password) { result in
-                                    switch result {
-                                    case .success(let message):
-                                        errorMessage = message
-                                        // If login is successful, set navigateToHome to true
-                                        if errorMessage == "Login successful!" {
-                                            navigateToHome = true
-                                        }
-                                    case .failure(let error):
-                                        errorMessage = "Error: \(error.localizedDescription)"
-                                    }
-                                }
-                            } else {
-                                errorMessage = "Invalid email or password"
+                Button("Login") {
+                    if isValidEmail(email) && isPasswordValid {
+                        viewModel.login(email: email, password: password) { result in
+                            switch result {
+                            case .success(_):
+                                self.rootView = .main
+                            case .failure(let error):
+                                errorMessage = "Error: \(error.localizedDescription)"
                             }
                         }
-                        .padding()
-                        .disabled(!isPasswordValid)
+                    } else {
+                        errorMessage = "Invalid email or password"
                     }
-                )
+                }
+                .padding()
+                .disabled(!isPasswordValid)
 
-                NavigationLink(
-                    destination: SignUpView(),
-                    isActive: $navigateToSignUp,
-                    label: {
-                        Button("Don't have an account? Sign up now.") {
-                            navigateToSignUp = true
-                        }
-                        .padding()
-                    }
-                )
+                Button("Don't have an account? Sign up now.") {
+                    self.rootView = .signup
+                }
+                .padding()
             }
             .padding()
         }

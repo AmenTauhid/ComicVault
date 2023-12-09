@@ -2,22 +2,11 @@
 //  RootView.swift
 //  ComicVault
 //
-//  Created by Ayman Tauhid on 2023-12-04.
+//  Created by Omar Al-Dulaimi on 2023-12-04.
 //
 
-import SwiftUI
+import Foundation
 
-struct RootView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
-
-    var body: some View {
-        NavigationView {
-            if authViewModel.isAuthenticated {
-                HomeView() // Your authenticated home view
-            } else {
-                LoginView() // Your login view
-            }
-        }
-    }
+enum RootView{
+    case login, main, signup
 }
-
