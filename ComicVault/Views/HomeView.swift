@@ -16,7 +16,7 @@ struct HomeView: View {
     @State private var hasChats = false
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ZStack {
                 VStack {
                     ZStack {
@@ -316,7 +316,7 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } // Side Drawer //////////////////////////////////////////////////////////////
             }
-        }
+//        }
     }
 }
 

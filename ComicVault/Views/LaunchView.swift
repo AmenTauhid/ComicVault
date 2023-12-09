@@ -21,7 +21,7 @@ struct LaunchView: View {
             case .signup:
                 SignUpView(rootView: self.$rootView)
             }
-        }
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 

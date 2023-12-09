@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "3E7B8A0B-F4D9-4036-9461-81543FD8FAB9": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "ComicVaultML 1.mlmodel",
+            "path": "com.apple.CoreML/ComicVaultML 1.mlmodel"
+        },
+        "7AB31110-BBC8-4815-ADD7-32871A270234": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        },
+        "EED2DB3A-1EC5-47B3-A8A7-A3C0B6C9B99B": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        }
+    },
+    "rootModelIdentifier": "3E7B8A0B-F4D9-4036-9461-81543FD8FAB9"
+}
