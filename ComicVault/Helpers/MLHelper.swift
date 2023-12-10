@@ -1,84 +1,74 @@
-//
-//  MLHelper.swift
-//  ComicVault
-//
-//  Created by Ayman Tauhid on 2023-12-09.
-//
-
 import Foundation
 import Vision
 import CoreML
 import UIKit
 
-class MLHelper : ObservableObject{
+class MLHelper: ObservableObject {
     @Published var classification = "XXXX"
-    
-    private var classificationRequest : VNCoreMLRequest?
-    
-    func createRequest(){
-        do{
-            //obtain the ML model instance
+    @Published var comicTitle = "Unknown Title"
+    @Published var issueNumber = "Unknown Issue"
+
+    private var classificationRequest: VNCoreMLRequest?
+
+    func createRequest() {
+        do {
             let model = try VNCoreMLModel(for: ComicVaultML_1(configuration: MLModelConfiguration()).model)
-            
-            let request = VNCoreMLRequest(model: model, completionHandler: {request, error in
-                
-                if (error == nil){
-                    self.processClassification(for: request, error: error)
-                }else{
-                    print(#function, "No proceeding with classification. Error : \(error!)")
+
+            let request = VNCoreMLRequest(model: model) { [weak self] request, error in
+                if let error = error {
+                    print(#function, "Error during classification: \(error.localizedDescription)")
+                    return
                 }
-            })
-            
+                self?.processClassification(for: request)
+            }
+
             request.imageCropAndScaleOption = .centerCrop
             self.classificationRequest = request
-            
-        }catch let err {
-            print(#function, "Unable to create request due to error : \(err)")
+
+        } catch {
+            print(#function, "Unable to create request: \(error.localizedDescription)")
         }
     }
-    
-    func processClassification(for request : VNRequest, error : Error?){
-        
+
+    func processClassification(for request: VNRequest) {
         DispatchQueue.main.async {
-            guard let results = request.results else{
-                self.classification = "Unable to classify image due to error \(error!)"
+            guard let results = request.results as? [VNClassificationObservation],
+                  let topResult = results.first else {
+                self.classification = "Unable to classify image."
                 return
             }
-            
-            let classificationList = results as! [VNClassificationObservation]
-            
-            if classificationList.isEmpty{
-                print(#function, "No classification recevied")
-                self.classification = "No matching category for the flower"
-            }else{
-                let topClassifications = classificationList.prefix(upTo: 4)
-                
-                let desctiptions = topClassifications.map{ category in
-                    return String(format: "(%.2f) %@", category.confidence, category.identifier)
-                }
-                
-                self.classification = "\(desctiptions.joined(separator: "\n"))"
-                print(#function, "classification : \(self.classification)")
-            }
+
+            let identifier = topResult.identifier
+            self.classification = identifier
+            self.parseComicDetails(from: identifier)
         }
-        
     }
-    
-    func updateClassification(for selectedImage : UIImage){
-        
-        guard let imageInput = CIImage(image: selectedImage) else{
-            print(#function, "unable to obtain CIImage for processsing")
-            self.classification = "unable to obtain CIImage for processsing"
+
+    func updateClassification(for selectedImage: UIImage) {
+        guard let imageInput = CIImage(image: selectedImage),
+              let classificationRequest = self.classificationRequest else {
+            self.classification = "Unable to process image."
             return
         }
-        
+
         let handler = VNImageRequestHandler(ciImage: imageInput)
-        
-        do{
-            //create request and process it
-            try handler.perform([self.classificationRequest!])
-        }catch{
-            print(#function, "Unable to perform classification due to error : \(error)")
+        do {
+            try handler.perform([classificationRequest])
+        } catch {
+            print(#function, "Error performing classification: \(error.localizedDescription)")
+        }
+    }
+
+    private func parseComicDetails(from identifier: String) {
+        let components = identifier.split(separator: "_#")
+        if components.count == 2 {
+            let title = components[0].replacingOccurrences(of: "_", with: " ")
+            let issue = components[1]
+            self.comicTitle = title
+            self.issueNumber = String(issue)
+        } else {
+            self.comicTitle = "Unknown Title"
+            self.issueNumber = "Unknown Issue"
         }
     }
 }

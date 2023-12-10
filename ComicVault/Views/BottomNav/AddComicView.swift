@@ -18,6 +18,7 @@ struct AddComicView: View {
     @State private var showCameraSheet = false
     @State private var capturedImage: UIImage?
     @State private var barcodeResults: [String] = []
+    @ObservedObject private var mlHelper = MLHelper()
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -31,7 +32,7 @@ struct AddComicView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
-
+                
                 VStack {
                     TextField("Comic Name", text: $name)
                         .foregroundColor(.black)
@@ -92,34 +93,24 @@ struct AddComicView: View {
                     .sheet(isPresented: $showCameraSheet) {
                         ImagePicker(image: self.$capturedImage, sourceType: .camera)
                     }
-                    .onChange(of: capturedImage) { newImage in
-                        if let validImage = newImage {
-                            TextExtractor.recognizeText(from: validImage) { extractedTexts in
-                                // Clear existing values
-                                self.name = ""
-                                self.issueNumber = ""
-                                self.releaseYear = ""
-
-                                // Join all lines of text into a single string for easier pattern matching
-                                let fullText = extractedTexts.joined(separator: " ")
-                                print(fullText)
-                                
-                                // Extract specific information
-                                self.issueNumber = TextExtractor.extractIssueNumber(from: fullText)
-                                
-                                // Assuming we extract the month and use the current year as release year
-                                if let month = TextExtractor.extractMonth(from: fullText) {
-                                    self.releaseYear = "\(month)"
-                                }
-                                
-                                // Extract the comic name
-                                self.name = TextExtractor.extractComicName(from: fullText)
-                            }
+                    .onChange(of: capturedImage) { _ in
+                        if let validImage = capturedImage {
+                            mlHelper.updateClassification(for: validImage)
                         }
                     }
-
+                    
+                    // Observing the changes from MLHelper
+                    .onChange(of: mlHelper.comicTitle) { newTitle in
+                        self.name = newTitle
+                    }
+                    .onChange(of: mlHelper.issueNumber) { newIssueNumber in
+                        self.issueNumber = newIssueNumber
+                    }
                 }
                 .padding(.top, 36)
+            }
+            .onAppear {
+                self.mlHelper.createRequest()
             }
         }
         .edgesIgnoringSafeArea(.bottom)
