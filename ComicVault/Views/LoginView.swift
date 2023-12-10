@@ -23,49 +23,124 @@ struct LoginView: View {
     @State private var isPasswordValid = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .onChange(of: password) { newPassword in
-                        isPasswordValid = isValidPassword(newPassword)
-                    }
-                    .background(isPasswordValid ? Color.green.opacity(0.3) : Color.red.opacity(0.3))
-                    .cornerRadius(8)
-
-                if let errorMessage = errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                }
-
-                Button("Login") {
-                    if isValidEmail(email) && isPasswordValid {
-                        viewModel.login(email: email, password: password) { result in
-                            switch result {
-                            case .success(_):
-                                self.rootView = .main
-                            case .failure(let error):
-                                errorMessage = "Error: \(error.localizedDescription)"
-                            }
-                        }
-                    } else {
-                        errorMessage = "Invalid email or password"
+        ZStack {
+            ZStack {
+                Color(red: 70/255, green: 96/255, blue: 115/255) //Dark Grey/Blue
+                    .frame(maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                VStack(spacing: 0) {
+                    Color(red: 70/255, green: 96/255, blue: 115/255) //Dark Grey/Blue
+                        .frame(maxHeight: .infinity / 2)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(spacing: 0) {
+                        Color(red: 130/255, green: 180/255, blue: 206/255) //Mid Blue/Grey
+                            .frame(height: 300)
+                            .rotationEffect(.degrees(-10))
+                            .offset(x: -50)
+                            .edgesIgnoringSafeArea(.all)
+                            .shadow(radius: 5)
+                        
+                        Color(red: 236/255, green: 107/255, blue: 102/255) //Light Red
+                            .frame(height: 300)
+                            .rotationEffect(.degrees(-10))
+                            .edgesIgnoringSafeArea(.all)
+                            .shadow(radius: 5)
+                        
+                        Color(red: 247/255, green: 227/255, blue: 121/255) //Yellow
+                            .frame(height: 300)
+                            .rotationEffect(.degrees(-10))
+                            .offset(x: 50)
+                            .edgesIgnoringSafeArea(.all)
+                            .shadow(radius: 5)
                     }
                 }
-                .padding()
-                .disabled(!isPasswordValid)
-
-                Button("Don't have an account? Sign up now.") {
-                    self.rootView = .signup
-                }
-                .padding()
             }
-            .padding()
+
+            VStack(alignment: .leading) {
+                Spacer()
+                Text("Welcome to ComicVault!")
+                    .font(.system(size: 26, design: .serif))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding(.leading, 16)
+                    .offset(y: -10)
+                    .shadow(radius: 5)
+                Text("Sign In to your account")
+                    .font(.system(size: 16, design: .serif))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding(.leading, 16)
+                    .offset(y: -10)
+                    .shadow(radius: 5)
+
+                VStack {
+                    TextField("Email", text: $email)
+                        .padding()
+                        .padding(.top, 5)
+                        .foregroundColor(.black)
+                        .frame(width: 350)
+                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
+                        .cornerRadius(50)
+                        .shadow(radius: 5)
+
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .foregroundColor(.black)
+                        .frame(width: 350)
+                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
+                        .cornerRadius(50)
+                        .shadow(radius: 5)
+                        .onChange(of: password) { newPassword in
+                            isPasswordValid = isValidPassword(newPassword)
+                        }
+
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+
+                    Button("Login") {
+                        if isValidEmail(email) && isPasswordValid {
+                            viewModel.login(email: email, password: password) { result in
+                                switch result {
+                                case .success(_):
+                                    self.rootView = .main
+                                case .failure(let error):
+                                    errorMessage = "Error: \(error.localizedDescription)"
+                                }
+                            }
+                        } else {
+                            errorMessage = "Invalid email or password"
+                        }
+                    }
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(red: 231/255, green: 243/255, blue: 254/255))
+                    .padding()
+                    .frame(width: 200)
+                    .background(Color(red: 70/255, green: 96/255, blue: 115/255))
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                    .disabled(!isPasswordValid)
+
+                    Button(action: {
+                        self.rootView = .signup
+                    }) {
+                        Text("Don't have an account? ")
+                            .foregroundColor(Color.black)
+                        +
+                        Text("Sign up now.")
+                            .foregroundColor(Color(red: 70/255, green: 96/255, blue: 115/255))
+                    }
+                    .padding()
+                }
+                .padding()
+
+                Spacer()
+            }
+            .edgesIgnoringSafeArea(.all)
+            .offset(y: -50)
         }
     }
 
