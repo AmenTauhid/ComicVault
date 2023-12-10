@@ -43,60 +43,124 @@ struct SignUpView: View {
     @State private var isPasswordValid = false
 
     var body: some View {
-        VStack {
-            Spacer()
-
-            Text("Sign Up")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.blue)
-
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-//                .foregroundColor(.black)
-
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .onChange(of: password, perform: { newPassword in
-                    // Validate password and update UI accordingly
-                    isPasswordValid = isValidPassword(newPassword)
-                })
-                .background(isPasswordValid ? Color.blue.opacity(0.3) : Color.gray.opacity(0.1))
-                .cornerRadius(12)
-
-            if let errorMessage = errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding(.top, 8)
-            }
-
-            Button("Sign Up") {
-                // Perform email and password validation
-                if isValidEmail(email) && isPasswordValid {
-                    viewModel.signUp(email: email, password: password) { result in
-                        switch result {
-                        case .success(let message):
-                            errorMessage = message
-                        case .failure(let error):
-                            errorMessage = "Error: \(error.localizedDescription)"
-                        }
+        ZStack{
+            ZStack {
+                Color(red: 70/255, green: 96/255, blue: 115/255) // Dark Grey/Blue
+                    .frame(maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack(spacing: 0) {
+                    Color(red: 70/255, green: 96/255, blue: 115/255) // Dark Grey/Blue
+                        .frame(maxHeight: .infinity / 2)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(spacing: 0) {
+                        Color(red: 130/255, green: 180/255, blue: 206/255) // Mid Blue/Grey
+                            .frame(height: 300)
+                            .rotationEffect(.degrees(190))
+                            .offset(x: 50)
+                            .edgesIgnoringSafeArea(.all)
+                            .shadow(radius: 5)
+                        
+                        Color(red: 236/255, green: 107/255, blue: 102/255) // Light Red
+                            .frame(height: 300)
+                            .rotationEffect(.degrees(190))
+                            .edgesIgnoringSafeArea(.all)
+                            .shadow(radius: 5)
+                        
+                        Color(red: 247/255, green: 227/255, blue: 121/255) // Yellow
+                            .frame(height: 300)
+                            .rotationEffect(.degrees(190))
+                            .offset(x: -50)
+                            .edgesIgnoringSafeArea(.all)
+                            .shadow(radius: 5)
                     }
-                } else {
-                    errorMessage = "Invalid email or password"
                 }
             }
-            .padding()
-            .foregroundColor(.white)
-            .background(isPasswordValid ? Color.blue : Color.gray)
-            .cornerRadius(12)
-            .disabled(!isPasswordValid)
+            VStack(alignment: .trailing) {
+                Spacer()
+                Text("Register with ComicVault!")
+                    .font(.system(size: 26, design: .serif))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding(.leading, 16)
+                    .offset(y: -10)
+                    .shadow(radius: 5)
+                Text("Create your new account")
+                    .font(.system(size: 16, design: .serif))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding(.leading, 16)
+                    .offset(y: -10)
+                    .shadow(radius: 5)
+                VStack {
+                    TextField("Yout email address", text: $email)
+                        .padding()
+                        .padding(.top, 5)
+                        .foregroundColor(.black)
+                        .frame(width: 350)
+                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
+                        .cornerRadius(50)
+                        .shadow(radius: 5)
 
-            Spacer()
+                    SecureField("Create a password", text: $password)
+                        .padding()
+                        .foregroundColor(.black)
+                        .frame(width: 350)
+                        .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
+                        .cornerRadius(50)
+                        .shadow(radius: 5)
+                        .onChange(of: password, perform: { newPassword in
+                            isPasswordValid = isValidPassword(newPassword)
+                        })
+                        .background(isPasswordValid ? Color.blue.opacity(0.3) : Color.gray.opacity(0.1))
+
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding(.top, 8)
+                    }
+
+                    Button("Sign Up") {
+                        // Perform email and password validation
+                        if isValidEmail(email) && isPasswordValid {
+                            viewModel.signUp(email: email, password: password) { result in
+                                switch result {
+                                case .success(let message):
+                                    errorMessage = message
+                                case .failure(let error):
+                                    errorMessage = "Error: \(error.localizedDescription)"
+                                }
+                            }
+                        } else {
+                            errorMessage = "Invalid email or password"
+                        }
+                    }
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(red: 231/255, green: 243/255, blue: 254/255))
+                    .padding()
+                    .frame(width: 200)
+                    .background(Color(red: 70/255, green: 96/255, blue: 115/255))
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                    .disabled(!isPasswordValid)
+                    
+                    Button(action: {
+                        self.rootView = .login
+                    }) {
+                        Text("Already have an account? ")
+                            .foregroundColor(Color.black)
+                        +
+                        Text("Login now.")
+                            .foregroundColor(Color(red: 70/255, green: 96/255, blue: 115/255))
+                    }
+                    .padding()
+                    Spacer()
+                }
+            }
+            .edgesIgnoringSafeArea(.all)
+            .offset(y: 225)
         }
-        .padding()
-        .background(Color.white.edgesIgnoringSafeArea(.all))
     }
 
     private func isValidEmail(_ email: String) -> Bool {
