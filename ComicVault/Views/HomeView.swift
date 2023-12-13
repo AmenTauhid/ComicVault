@@ -204,7 +204,7 @@ struct HomeView: View {
 
                             NavigationLink(destination: MapView()) {
                                 VStack {
-                                    Image(systemName: "chart.bar")
+                                    Image(systemName: "map.fill")
                                         .fontWeight(.bold)
                                         .font(.title)
                                         .foregroundColor(.black)
@@ -212,7 +212,7 @@ struct HomeView: View {
                                         .background(Color(red: 130/255, green: 180/255, blue: 206/255)) //Mid Blue/Grey
                                         .clipShape(Circle())
                                         .shadow(radius: 5)
-                                    Text("Prices")
+                                    Text("Map")
                                         .foregroundColor(.black)
                                         .fontWeight(.bold)
                                 }
