@@ -60,6 +60,8 @@
 		179BCC662B0D1F5D001A0E00 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 179BCC652B0D1F5D001A0E00 /* FirebaseAppCheck */; };
 		179F217C2B24F96F00BB83BC /* ComicVaultML 1.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 179F217B2B24F96F00BB83BC /* ComicVaultML 1.mlpackage */; };
 		179F217E2B2500C000BB83BC /* MLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F217D2B2500C000BB83BC /* MLHelper.swift */; };
+		17EDE2342B29683D00A2CE21 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDE2332B29683D00A2CE21 /* LocationHelper.swift */; };
+		17EDE2362B29685500A2CE21 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDE2352B29685500A2CE21 /* LocationViewModel.swift */; };
 		64E7FBAE2B0D1AB2009A490C /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA62B0D1AB1009A490C /* ChatsView.swift */; };
 		64E7FBAF2B0D1AB2009A490C /* PublishCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBAD2B0D1AB2009A490C /* PublishCollectionsView.swift */; };
 		64E7FBB02B0D1AB2009A490C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7FBA72B0D1AB1009A490C /* SettingsView.swift */; };
@@ -90,6 +92,8 @@
 		179BCC5A2B0D1F0C001A0E00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		179F217B2B24F96F00BB83BC /* ComicVaultML 1.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "ComicVaultML 1.mlpackage"; sourceTree = "<group>"; };
 		179F217D2B2500C000BB83BC /* MLHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLHelper.swift; sourceTree = "<group>"; };
+		17EDE2332B29683D00A2CE21 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		17EDE2352B29685500A2CE21 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		64E7FBA52B0D1AB1009A490C /* AddComicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComicView.swift; sourceTree = "<group>"; };
 		64E7FBA62B0D1AB1009A490C /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
 		64E7FBA72B0D1AB1009A490C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				179F217B2B24F96F00BB83BC /* ComicVaultML 1.mlpackage */,
 				175ED75D2B0DDBD400617929 /* Comic.swift */,
 				177543E92B1ED78E008B6990 /* AuthViewModel.swift */,
+				17EDE2352B29685500A2CE21 /* LocationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				175ED7812B0EEC0400617929 /* EBayHelper.swift */,
 				172E3BEE2B198957004A18CF /* CameraScan.swift */,
 				179F217D2B2500C000BB83BC /* MLHelper.swift */,
+				17EDE2332B29683D00A2CE21 /* LocationHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -377,8 +383,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17EDE2342B29683D00A2CE21 /* LocationHelper.swift in Sources */,
 				177543EA2B1ED78E008B6990 /* AuthViewModel.swift in Sources */,
 				175ED7822B0EEC0400617929 /* EBayHelper.swift in Sources */,
+				17EDE2362B29685500A2CE21 /* LocationViewModel.swift in Sources */,
 				179F217E2B2500C000BB83BC /* MLHelper.swift in Sources */,
 				64E7FBB02B0D1AB2009A490C /* SettingsView.swift in Sources */,
 				179F217C2B24F96F00BB83BC /* ComicVaultML 1.mlpackage in Sources */,
@@ -537,6 +545,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan comic book covers for text recognition.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide location-based services both when the app is in use and in the background.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show nearby comic stores.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -568,6 +578,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan comic book covers for text recognition.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide location-based services both when the app is in use and in the background.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show nearby comic stores.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -21,9 +21,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct ComicVaultApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    let locationHelper = LocationHelper()
+    
     var body: some Scene {
         WindowGroup {
-            LaunchView()
+            LaunchView().environmentObject(locationHelper)
         }
     }
 }

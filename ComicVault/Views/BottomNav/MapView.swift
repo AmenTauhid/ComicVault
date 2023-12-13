@@ -8,9 +8,25 @@
 import SwiftUI
 
 struct MapView: View {
+    @EnvironmentObject var locationHelper : LocationHelper
+    
     var body: some View {
-        Text("Comic Price List")
-            .font(.title)
-            .padding()
+        VStack{
+            if (self.locationHelper.currentLocation != nil){
+                
+                //show the map with location
+                LocationViewModel().environmentObject(self.locationHelper)
+                
+            }else{
+                Text("Current location not available")
+            }
+        }
+
+    }//body
+}
+
+struct MapView_Previews: PreviewProvider {
+    static var previews: some View {
+        MapView()
     }
 }
