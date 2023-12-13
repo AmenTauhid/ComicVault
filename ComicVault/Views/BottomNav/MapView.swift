@@ -2,7 +2,11 @@
 //  PriceListView.swift
 //  ComicVault
 //
-//  Created by Elias Alissandratos on 2023-11-20.
+//  Created by Ayman Tauhid on 2023-11-20.
+//
+//  Omar's StudentID: 991653328
+//  Ayman's StudentID: 991659098
+//  Elias's StudentID: 991635816
 //
 
 import SwiftUI
