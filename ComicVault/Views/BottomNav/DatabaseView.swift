@@ -9,22 +9,34 @@ import SwiftUI
 
 struct DatabaseView: View {
     @ObservedObject private var firestoreManager = FirestoreManager()
-    @State private var isEditingComic = false
     @State private var selectedComic: Comic?
     
     var body: some View {
-        List {
-            ForEach(firestoreManager.comics) { comic in
-                ComicRow(comic: comic)
+        NavigationView {
+            VStack(alignment: .leading) {
+                Text("    Total Comics: \(firestoreManager.comics.count)")
+                    .font(.headline)
+                    .padding()
+                    .foregroundColor(.gray)
+
+                List {
+                    ForEach(firestoreManager.comics.indices, id: \.self) { index in
+                        NavigationLink(destination: ComicDetailView(firestoreManager: firestoreManager, comic: firestoreManager.comics[index])) {
+                            ComicRow(comic: firestoreManager.comics[index], firestoreManager: firestoreManager, index: index + 1)
+                        }
+                    }
+                    .onDelete(perform: deleteComic)
+                }
             }
-            .onDelete(perform: deleteComic)
+            .background(Color(red: 70/255, green: 96/255, blue: 115/255))
+            .navigationBarItems(leading:
+                Text("My Comics")
+                    .font(.system(.title, design: .serif))
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding()
+            )
         }
-        .sheet(isPresented: $isEditingComic) {
-            if let selectedComic = selectedComic {
-                ComicDetailView(firestoreManager: firestoreManager, comic: selectedComic)
-            }
-        }
-        .navigationTitle("My Comics")
     }
 
     private func deleteComic(at offsets: IndexSet) {
@@ -37,11 +49,18 @@ struct DatabaseView: View {
 
 struct ComicRow: View {
     let comic: Comic
+    var firestoreManager: FirestoreManager
+    var index: Int
     
     var body: some View {
         HStack {
+            Text(" \(index) ")
+                .font(.headline)
+                .padding(5)
+                .foregroundColor(.white)
+                .cornerRadius(10)
             VStack(alignment: .leading) {
-                Text(comic.name)
+                Text("\(comic.name)")
                     .font(.headline)
                 Text("Issue: \(comic.issueNumber)")
                 Text("Year: \(comic.releaseYear)")
@@ -51,17 +70,17 @@ struct ComicRow: View {
                     Text("Price: N/A")
                 }
             }
-            
+            .foregroundColor(.black)
+            .padding(.vertical, 5)
             Spacer()
-            
-            Button("Edit") {
-                // Handle edit action
-            }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            .frame(alignment: .trailing)
+            EmptyView()
         }
+        .background(rowColor(for: index))
+        .cornerRadius(10)
+    }
+    
+    private func rowColor(for index: Int) -> Color {
+        let colors: [Color] = [Color(red: 247/255, green: 227/255, blue: 121/255), Color(red: 130/255, green: 180/255, blue: 206/255), Color(red: 236/255, green: 107/255, blue: 102/255)]
+        return colors[index % colors.count]
     }
 }

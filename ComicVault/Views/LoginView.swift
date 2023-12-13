@@ -77,7 +77,6 @@ struct LoginView: View {
                 VStack {
                     TextField("Email", text: $email)
                         .padding()
-                        .padding(.top, 5)
                         .foregroundColor(.black)
                         .frame(width: 350)
                         .background(Color(red: 231/255, green: 243/255, blue: 254/255)) // Light White/Blue
