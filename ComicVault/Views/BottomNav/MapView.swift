@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PriceListView: View {
+struct MapView: View {
     var body: some View {
         Text("Comic Price List")
             .font(.title)

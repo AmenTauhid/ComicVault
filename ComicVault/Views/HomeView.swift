@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @Binding var rootView : RootView
     @State private var isShowingDrawer = false
+    @ObservedObject private var firestoreManager = FirestoreManager() // Use ObservedObject
     
     //Notification Dots
     @State private var hasNotifications = false
@@ -197,7 +198,7 @@ struct HomeView: View {
 
                             Spacer()
 
-                            NavigationLink(destination: PriceListView()) {
+                            NavigationLink(destination: MapView()) {
                                 VStack {
                                     Image(systemName: "chart.bar")
                                         .fontWeight(.bold)
@@ -251,8 +252,8 @@ struct HomeView: View {
                                         .padding()
 
                                     HStack {
-                                        Text("John Smith")
-                                            .font(.system(size: 26, design: .serif))
+                                        Text(firestoreManager.userEmail)
+                                            .font(.system(size: 20, design: .serif))
                                             .padding()
                                             .fontWeight(.bold)
                                     }
@@ -263,8 +264,8 @@ struct HomeView: View {
                                     .padding([.leading, .trailing, .top])
 
                                     VStack {
-                                        Text("Total Comics: 100")
-                                        Text("Total Value: $500")
+                                        Text("Total Comics: \(firestoreManager.totalComics)")
+                                        Text("Total Value: $\(String(format: "%.2f", firestoreManager.totalValue))")
                                     }
                                     .foregroundColor(.gray)
                                     .padding([.leading, .trailing, .bottom])
@@ -319,11 +320,5 @@ struct HomeView: View {
 //        }
     }
 }
-
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
 
 
