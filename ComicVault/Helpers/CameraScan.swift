@@ -109,7 +109,6 @@ struct CameraClickView: UIViewControllerRepresentable {
             // eBay Browse API endpoint for searching by UPC
             let endpoint = "https://api.ebay.com/buy/browse/v1/item_summary/search?q=UPC:\(upc)"
 
-            // Replace "YOUR_ACCESS_TOKEN" with your actual eBay API access token
             let accessToken = "YOUR_ACCESS_TOKEN"
 
             guard let url = URL(string: endpoint) else {

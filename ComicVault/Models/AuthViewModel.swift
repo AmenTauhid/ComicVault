@@ -24,7 +24,6 @@ class AuthViewModel: ObservableObject {
     func login(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             if let error = error {
-                // Handle error - You might want to use a published property to display error messages
                 print("Login error: \(error.localizedDescription)")
             } else {
                 // Update authentication state
@@ -38,7 +37,6 @@ class AuthViewModel: ObservableObject {
     func signUp(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
             if let error = error {
-                // Handle error - You might want to use a published property to display error messages
                 print("Sign up error: \(error.localizedDescription)")
             } else {
                 // Update authentication state

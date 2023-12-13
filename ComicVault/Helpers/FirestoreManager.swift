@@ -76,9 +76,6 @@ class FirestoreManager: ObservableObject {
         ebayAPIManager.fetchEbaySearchResultsByUPC(upc: upc) { [weak self] result in
             switch result {
             case .success(let averagePrice):
-                // Create a comic instance with the average price and the UPC
-                // Since the UPC search does not provide specific comic details like name or issue,
-                // you might need to handle these fields accordingly.
                 let comic = Comic(name: "Unknown", issueNumber: "Unknown", releaseYear: "Unknown", price: averagePrice)
                 self?.addComic(comic, completion: completion)
             case .failure(let error):

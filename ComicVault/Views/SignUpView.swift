@@ -30,7 +30,6 @@ class SignUpViewModel: ObservableObject {
 
         let userData: [String: Any] = [
             "email": email,
-            // Add additional user data fields as needed
         ]
 
         db.collection("users").document(userId).setData(userData) { error in

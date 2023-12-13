@@ -13,7 +13,7 @@ import Foundation
 
 class EbayAPIManager {
     // eBay API key constant
-    private let ebayAPIKey = "OmarAlDu-ComicVau-PRD-ff4c095ff-f4147499"  // Replace with your actual eBay API key
+    private let ebayAPIKey = "OmarAlDu-ComicVau-PRD-ff4c095ff-f4147499" 
 
     // Function to create the eBay Finding API search URL
     private func createEbaySearchURL(forComicName name: String, issueNumber: String, releaseYear: String) -> URL? {
