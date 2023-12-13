@@ -2,6 +2,8 @@
 //  LaunchView.swift
 //  ComicVault
 //
+//  Group 10
+//
 //  Created by Omar Al-Dulaimi, Ayman Tauhid on 2023-12-08.
 //  Omar's StudentID: 991653328
 //  Ayman's StudentID: 991659098

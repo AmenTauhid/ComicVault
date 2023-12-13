@@ -2,6 +2,8 @@
 //  LocationHelper.swift
 //  ComicVault
 //
+//  Group 10
+//
 //  Created by Elias Alissandratos  on 2023-12-12.
 //
 //  Omar's StudentID: 991653328

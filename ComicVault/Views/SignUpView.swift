@@ -2,6 +2,8 @@
 //  HomeView.swift
 //  ComicVault
 //
+//  Group 10
+//
 //  Created by Omar Al-Dulaimi on 2023-11-20.
 //
 //  Omar's StudentID: 991653328

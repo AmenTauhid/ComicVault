@@ -2,6 +2,8 @@
 //  AuthViewModel.swift
 //  ComicVault
 //
+//  Group 10
+//
 //  Created by Ayman Tauhid on 2023-12-04.
 //
 //  Omar's StudentID: 991653328

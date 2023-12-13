@@ -2,6 +2,8 @@
 //  FirestoreHelper.swift
 //  ComicVault
 //
+//  Group 10
+//
 //  Created by Ayman Tauhid & Elias Alissandratos on 2023-11-22.
 //
 //  Omar's StudentID: 991653328

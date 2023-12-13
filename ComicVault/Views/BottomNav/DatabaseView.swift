@@ -2,6 +2,8 @@
 //  PriceListView.swift
 //  ComicVault
 //
+//  Group 10
+//
 //  Created by Elias Alissandratos on 2023-12-6.
 //
 //  Omar's StudentID: 991653328
